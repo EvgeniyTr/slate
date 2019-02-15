@@ -47,9 +47,12 @@ html, body {
   width: 20px;
 }
 
+.highlight .s2 {
+    color: #65ff69;
+}
+
 .toc-wrapper {
   transition: left 0.3s ease-in-out;
-
   overflow-y: auto;
   overflow-x: hidden;
   position: fixed;
@@ -262,7 +265,8 @@ html, body {
   // I know, it's hackish, but it's the simplist way to make the left
   // half of the content always this background color.
   .dark-box {
-    width: $examples-width;
+	
+    width: 10%;
     background-color: $examples-bg;
     position: absolute;
     right: 0;
@@ -282,7 +286,7 @@ html, body {
   width: 100%;
   font-weight: bold;
   a {
-    display: block;
+    display: none;
     float:left;
     color: $lang-select-text;
     text-decoration: none;
@@ -327,7 +331,7 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: $examples-width;
+    margin-right: 10%;
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
@@ -514,11 +518,10 @@ html, body {
   pre, blockquote {
     background-color: $code-bg;
     color: #fff;
+	margin: 0;
+    width: 90%;
 
-    margin: 0;
-    width: $examples-width;
-
-    float:right;
+    float:none;
     clear:right;
 
     box-sizing: border-box;

@@ -2,238 +2,53 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
+  - shell: Example
   - ruby
   - python
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href='https://merchant.cloudpayments.ru'>ЛК CP</a>
+  - <a href='https://cloudpayments.ru'>Сайт CloudPayments</a>
 
 includes:
-  - errors
+  - API
 
 search: true
 ---
 
-# Introduction
+# Общая Информация
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Версия 2.1 от 27.09.2017
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+## Термины и определения
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+* **Система** — платежный шлюз CloudPayments.  
+* **ТСП** — торгово-сервисное предприятие, работающее с системой.  
+* **API** — программный интерфейс для взаимодействия с системой, расположенный по адресу https://api.cloudpayments.ru  
+* **ЛК** — личный кабинет ТСП в системе, расположенный по адресу https://merchant.cloudpayments.ru  
+* **Карта** — банковская карта платежных систем Visa, MasterCard или МИР.  
+* **Эквайер** — расчетный банк.  
+* **Эмитент** — банк, выпустивший карту.  
+* **Держатель** — физическое лицо, которому эмитент выдал карту в пользование.  
+* **Виджет** — платежная форма, предоставленная системой для ввода реквизитов карты держателем и последующей авторизации.  
+* **3-D Secure** — протокол проверки держателя эмитентом.  
 
-# Authentication
+## Виды операций
 
-> To authorize, use this code:
+Система предполагает два вида операций: оплата и возврат. В первом случае деньги перечисляются со счета держателя в пользу ТСП, во втором — наоборот. Возврат выполняет ТСП в случае желания покупателя вернуть товар, и он всегда связан с операцией оплаты, сумма средств с которой будет возвращена держателю. Возвращать можно как всю сумму оплаты, так и ее часть. Деньги обычно возвращаются на карту держателя в тот же день, но иногда (зависит от эмитента) могут идти до 3-х дней.
+Операцию оплаты, в отличие от возврата, можно отменить. Отмену оплаты выполняет ТСП в случае, если платеж был совершен с ошибкой: неверная сумма, технический сбой и т.д. Есть ограничение — отменить операцию можно только в случае использования двустадийной схемы оплаты. Деньги при этом будут разблокированы на карте держателя практически мгновенно.
 
-```ruby
-require 'kittn'
+## Схемы проведения платежа
+Существуют два варианта проведения операции оплаты: одно- и двухстадийная, их также называют *single message scheme* (SMS) и *dual message scheme* (DMS).  
+ 
+**Одностадийная** оплата выполняется одной командой, по результатам которой проходит авторизация и последующее списание средств в пользу ТСП.  
+ 
+**Двухстадийная** оплата подразумевает использование двух команд: отдельно на авторизацию, отдельно на списание. После успешной авторизации, сумма операции будет блокирована на счету держателя, то есть он не сможет ей воспользоваться. Далее у ТСП есть до 7 дней в зависимости от типа карты для подтверждения операции, после чего произойдет списание денег. Если операцию не подтвердить в течение этого времени — она будет автоматически отменена. Подтверждать можно как всю сумму авторизации, так и часть.  
+Как правило, двухстадийная схема используется для получения депозита с плательщика, например, в прокатных компаниях или отелях.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+В зависимости от настройки, система может автоматически выполнять подтверждение двустадийных платежей через указанное количество дней.
 
-```python
-import kittn
 
-api = kittn.authorize('meowmeowmeow')
-```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
