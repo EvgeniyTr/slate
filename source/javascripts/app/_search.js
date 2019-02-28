@@ -1,6 +1,9 @@
 //= require ../lib/_lunr
 //= require ../lib/_jquery
 //= require ../lib/_jquery.highlight
+//= require ../lib/_lunr.stemmer.support
+//= require ../lib/_lunr.multi
+//= require ../lib/_lunr.ru
 
 
 ;(function () {
@@ -23,6 +26,7 @@
 
   function populate() {
     $('h1, h2').each(function() {
+		 index.use(lunr.multiLanguage('ru', 'en'));
       var title = $(this);
       var body = title.nextUntil('h1, h2');
       index.add({

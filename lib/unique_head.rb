@@ -1,14 +1,17 @@
 # Unique header generation
 require 'middleman-core/renderers/redcarpet'
 require 'digest'
+require 'russian'
+
 class UniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
   def initialize
     super
     @head_count = {}
   end
   def header(text, header_level)
-    friendly_text = text.gsub(/<[^>]*>/,"").parameterize
-    if friendly_text.strip.length == 0
+	friendly_text = Russian.translit(text)
+    friendly_text = friendly_text.gsub(/<[^>]*>/,"").parameterize
+	    if friendly_text.strip.length == 0
       # Looks like parameterize removed the whole thing! It removes many unicode
       # characters like Chinese and Russian. To get a unique URL, let's just
       # URI escape the whole header
@@ -21,4 +24,5 @@ class UniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
     end
     return "<h#{header_level} id='#{friendly_text}'>#{text}</h#{header_level}>"
   end
-end
+end 
+

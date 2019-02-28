@@ -1,6 +1,7 @@
 # Nested unique header generation
 require 'middleman-core/renderers/redcarpet'
 
+I18n.locale = :ru
 class NestingUniqueHeadCounter < Middleman::Renderers::MiddlemanRedcarpetHTML
   def initialize
     super

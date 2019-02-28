@@ -48,7 +48,7 @@ html, body {
 }
 
 .highlight .s2 {
-    color: #65ff69;
+    color: #70e5ff;
 }
 
 .toc-wrapper {
@@ -616,3 +616,8 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+
+.content pre.shell {
+    margin-bottom: 20px;
+	}

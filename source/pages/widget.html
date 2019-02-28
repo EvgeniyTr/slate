@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+	<title>widget</title>
+	<meta charset="utf-8">
+	</head>
+	<body>
+		<div class="sample">
+        <div class="form-group">
+            <label for="account-sample-3">Номер абонента:</label>
+            <div>
+                <input id="account-sample-3" required="" placeholder="" class="form-control" type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount-sample-3">Сумма:</label>
+            <div>
+                <input id="amount-sample-3" required="" placeholder="" class="form-control" type="text">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="recurrent-sample-3">
+                <input id="recurrent-sample-3" type="checkbox">
+                Включить ежемесячные платежи
+            </label>
+            <p class="help-block">При включении ваш счет будет пополняться с карты автоматически раз в месяц.</p>
+        </div>
+
+        <input id="checkout-sample-3" value="Перейти к оплате" class="btn" type="button">
+
+        <br>
+        <br>
+        <div class="form-group">
+            Вы можете остановить регулярные платежи в любой момент на <a href="https://my.cloudpayments.ru/unsubscribe">сайте системы CloudPayments</a>.
+        </div>
+    </div>
+	</body>
+</html>
