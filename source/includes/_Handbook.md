@@ -61,7 +61,7 @@
 
 Наши партнеры принимают платежи в рублях, американских долларах, евро, фунтах стерлингов и 54 других валютах мира.
 
-В таблице ниже представлены названия валют и их коды для использования в параметре `currency` [[виджета]]() или [[API]]().
+В таблице ниже представлены названия валют и их коды для использования в параметре `currency` [виджета](#platezhnyy-vidzhet) или [API](#api).
 
 | Название | Код |
 |:--------- | :------- |
@@ -190,15 +190,15 @@ CardPayout |	Выплата на карту
 
 | Код | Название |
 |:--------- | :------- |
-Check |	[[Check]]()
-Pay |	[[Pay]]()
-Fail |	[[Fail]]()
-Confirm |	[[Confirm]]()
-Refund |	[[Refund]]()
-Recurrent |	[[Recurrent]]()
-Receipt |	[[Receipt]]()
-Cancel |	[[Cancel]]()
-Kkt |	[[Kkt]]()
+Check |	[Check](#Check)
+Pay |	[Pay](#Pay)
+Fail |	[Fail](#Fail)
+Confirm |	[Confirm](#Confirm)
+Refund |	[Refund](#Refund)
+Recurrent |	[Recurrent](#Recurrent)
+Receipt |	[Receipt](#Receipt)
+Cancel |	[Cancel](#Cancel)
+Kkt |	[Kkt](#Kkt)
 
 
 
