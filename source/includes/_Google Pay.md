@@ -6,15 +6,15 @@ Google Pay — это быстрый и простой способ оплаты
 
 Google Pay работает с картами Visa и MasterCard и доступен всем организациям и индивидуальным предпринимателям, подключенным к системе CloudPayments без дополнительных соглашений и без изменений в условиях работы.
 
-[тут пример оплаты через Google PAY](https://show.cloudpayments.ru/main/)
+[Тут пример оплаты через Google PAY](https://show.cloudpayments.ru/main/)
 
 **Условия использования**
 
 Вы можете применять технологию Google Pay с системой CloudPayments на сайтах и в мобильных приложениях при соблюдении следующий требований:
 
-* Необходимо соблюдать [условия использования от компании Google](https://payments.developers.google.com/terms/sellertos), в том числе:
-  <br>[Список](https://payments.developers.google.com/terms/aup) запрещенных товаров и услуг;
-  <br>[Требования](https://developers.google.com/pay/api/brand-guidelines) по брендированию.
+* Необходимо соблюдать [условия использования от компании Google](https://payments.developers.google.com/terms/sellertos), в том числе:  
+	* [Список](https://payments.developers.google.com/terms/aup) запрещенных товаров и услуг;  
+	* [Требования](https://developers.google.com/pay/api/brand-guidelines) по брендированию.  
 * Для приема платежей в мобильном приложении или при размещении кнопки GPay на вашем сайте (как в примере выше), необходимо зарегистрировать приложение и сайт в Google и пройти процедуру проверки.
 
 **Принцип работы Google Pay**
@@ -25,8 +25,8 @@ Google Pay объединяет в себе возможности оплаты 
 
 При оплате с устройства без установленного приложения Google Pay, покупателю будет предложено выбрать сохраненную карту из его Google аккаунта и, на усмотрение процессора, пройти [3-d Secure](#3-d-secure) аутентификацию.
 
+<div id="integraciya"></div>  
 
-<div id="integraciya"></div>
 **Интеграция**
 
 _Регистрация сайтов и приложений_

@@ -190,15 +190,15 @@ CardPayout |	Выплата на карту
 
 | Код | Название |
 |:--------- | :------- |
-Check |	[Check](#Check)
-Pay |	[Pay](#Pay)
-Fail |	[Fail](#Fail)
-Confirm |	[Confirm](#Confirm)
-Refund |	[Refund](#Refund)
-Recurrent |	[Recurrent](#Recurrent)
-Receipt |	[Receipt](#Receipt)
-Cancel |	[Cancel](#Cancel)
-Kkt |	[Kkt](#Kkt)
+Check |	[Check](#check)
+Pay |	[Pay](#pay)
+Fail |	[Fail](#fail)
+Confirm |	[Confirm](#confirm)
+Refund |	[Refund](#refund)
+Recurrent |	[Recurrent](#recurrent)
+Receipt |	[Receipt](#receipt)
+Cancel |	[Cancel](#cancel)
+Kkt |	[Kkt](#kkt)
 
 
 
