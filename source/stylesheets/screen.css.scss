@@ -30,6 +30,7 @@ html, body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
   @extend %default-font;
   background-color: $main-bg;
   height: 100%;
@@ -42,20 +43,17 @@ html, body {
 
 #toc > ul > li > a > span {
   float: right;
-  background-color: #2484FF;
+  background-color: #fFF;
   border-radius: 40px;
   width: 20px;
 }
 
-.highlight .s2 {
-    color: #70e5ff;
-}
 
 .toc-wrapper {
   transition: left 0.3s ease-in-out;
+  position: fixed;
   overflow-y: auto;
   overflow-x: hidden;
-  position: fixed;
   z-index: 30;
   top: 0;
   left: 0;
@@ -64,6 +62,8 @@ html, body {
   background-color: $nav-bg;
   font-size: 13px;
   font-weight: bold;
+
+
 
   // language selector for mobile devices
   .lang-selector {
@@ -78,12 +78,14 @@ html, body {
   .logo {
     display: block;
     max-width: 100%;
+    margin-left: 2px;
     margin-bottom: $logo-margin;
+    border-bottom: 3px;
   }
 
   &>.search {
     position: relative;
-
+    border-top: 1px solid #f2f2f2;
     input {
       background: $nav-bg;
       border-width: 0 0 1px 0;
@@ -93,7 +95,7 @@ html, body {
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - ($nav-padding*2);
       outline: none;
-      color: $nav-text;
+      color: $nav-text-search;
       border-radius: 0; /* ios has a default border radius */
     }
 
@@ -101,7 +103,7 @@ html, body {
       position: absolute;
       top: 17px;
       left: $nav-padding;
-      color: $nav-text;
+      color: #f2f2f2;
       @extend %icon-search;
     }
   }
@@ -110,7 +112,7 @@ html, body {
     margin-top: 0;
     box-sizing: border-box;
     height: 0;
-    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
     transition-property: height, margin;
     transition-duration: 180ms;
@@ -180,10 +182,10 @@ html, body {
   .toc-footer {
     padding: 1em 0;
     margin-top: 1em;
-    border-top: 1px dashed $nav-footer-border-color;
+    border-top: 1px solid #f2f2f2;// $nav-footer-border-color;
 
     li,a {
-      color: $nav-text;
+      color: #6496DC;
       text-decoration: none;
     }
 
@@ -192,8 +194,8 @@ html, body {
     }
 
     li {
-      font-size: 0.8em;
-      line-height: 1.7;
+      font-size: 12px;
+      line-height: 2;
       text-decoration: none;
     }
   }
@@ -212,6 +214,13 @@ html, body {
   transition-duration: 130ms;
 }
 
+.toc-footer>li:nth-child(4), .toc-footer>li:last-child{
+  display: inline-block;
+}
+
+.toc-footer>li:last-child{
+  padding:0;
+}
 // button to show navigation on mobile devices
 #nav-button {
   span {
@@ -266,13 +275,14 @@ html, body {
   // half of the content always this background color.
   .dark-box {
 	
-    width: 10%;
+    width: 0%;
     background-color: $examples-bg;
     position: absolute;
     right: 0;
     top: 0;
     bottom: 0;
   }
+
 
   .lang-selector {
     position: fixed;
@@ -331,13 +341,15 @@ html, body {
   }
 
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
-    margin-right: 10%;
+    margin-right: 0%;
     padding: 0 $main-padding;
     box-sizing: border-box;
     display: block;
 
     @extend %left-col;
   }
+
+
 
   &>ul, &>ol {
     padding-left: $main-padding + 15px;
@@ -355,9 +367,9 @@ html, body {
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    background-color: #fdfdfd;
+    border-top: 1px solid rgba(51, 51, 51, 0.05);
+    border-bottom: 1px solid #f9f9f9;
+    background-color: #f9f9f9;
   }
 
   h1:first-child, div:first-child + h1 {
@@ -370,7 +382,7 @@ html, body {
     font-size: 19px;
     margin-top: 4em;
     margin-bottom: 0;
-    border-top: 1px solid #ccc;
+//    border-top: 1px solid #ccc;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
     background-image: linear-gradient(to bottom, rgba(#fff, 0.2), rgba(#fff, 0));
@@ -401,8 +413,16 @@ html, body {
   }
 
   table {
-    margin-bottom: 1em;
+    width: 95%;
+    margin: auto;
+    padding: auto;
+    //position: relative;
+    background: #fff;
+    //margin-bottom: 1em;
     overflow: auto;
+    border-radius: 5px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+
     th,td {
       text-align: left;
       vertical-align: top;
@@ -414,16 +434,17 @@ html, body {
 
     th {
       padding: 5px 10px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid #f2f2f2;
       vertical-align: bottom;
+      background: #fff;
     }
 
     td {
       padding: 10px;
     }
 
-    tr:last-child {
-      border-bottom: 1px solid #ccc;
+    tr{
+      border-bottom: 1px solid #f2f2f2;
     }
 
     tr:nth-child(odd)>td {
@@ -445,7 +466,7 @@ html, body {
 
   p, li, dt, dd {
     line-height: 1.6;
-    margin-top: 0;
+    margin-top: 10px;
   }
 
   img {
@@ -466,13 +487,16 @@ html, body {
   }
 
   aside {
+    width: 95%;
     padding-top: 1em;
     padding-bottom: 1em;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+    margin-right: auto;
+    margin-left: auto;
     background: $aside-notice-bg;
     line-height: 1.6;
-
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
     &.warning {
       background-color: $aside-warning-bg;
     }
@@ -508,7 +532,15 @@ html, body {
     background: linear-gradient(to top left, #F7E633 0%, #F1D32F 100%);
   }
 }
-
+.page-wrapper > .content > p:nth-child(2){
+  float: right;
+  padding: 0;
+  margin:0;
+}
+.page-wrapper > .content > h1:first-child{
+  margin: 0;
+  padding-bottom:0;
+}
 ////////////////////////////////////////////////////////////////////////////////
 // CODE SAMPLE STYLES
 ////////////////////////////////////////////////////////////////////////////////
@@ -518,17 +550,16 @@ html, body {
   pre, blockquote {
     background-color: $code-bg;
     color: #fff;
-	margin: 0;
-    width: 90%;
-
-    float:none;
-    clear:right;
+	margin: auto;
+    width: 95%;
+    float: none;
+    clear: right;
 
     box-sizing: border-box;
 
     @extend %right-col;
 
-    &>p { margin: 0; }
+    &>p { margin: 0px;}
 
     a {
       color: #fff;
@@ -540,8 +571,11 @@ html, body {
   pre {
     @extend %code-font;
     padding-top: 2em;
+    border-radius: 4px;
     padding-bottom: 2em;
     padding: 2em $main-padding;
+    margin-bottom: 5px;
+
   }
 
   blockquote {
@@ -579,6 +613,7 @@ html, body {
   .toc-link {
     padding-top: 0.3em;
     padding-bottom: 0.3em;
+    border-bottom: 3px #f2f2f2;
   }
 }
 
@@ -618,6 +653,40 @@ html, body {
 }
 
 
-.content pre.shell {
-    margin-bottom: 20px;
-	}
+//Custom Below
+
+
+.highlight .s2 {
+    color: #7FFF00;
+}
+.highlight .o {
+    color: #7FFF00;
+}
+
+.highlight .k  {
+    color: #7FFF00;
+}
+
+.highlight .kv {
+ color: #ffffff;
+}
+
+.highlight .s1 {
+    color: #7FFF00;
+}
+
+.highlight .nb {
+    color: #ffffff;
+}
+
+
+.highlight {
+    color: #7FFF00;
+}
+.content pre > code {
+color: #7FFF00;
+}
+
+.highlight .se {
+    color: #ffffff;
+}

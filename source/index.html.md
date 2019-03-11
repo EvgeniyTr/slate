@@ -20,15 +20,14 @@ includes:
   - SDK mobile
   - API
   - Notifications
-  - Kassa
-  - Handbook
-  - Long record
-  - Testing
   - Apple Pay
   - Google Pay
   - Integration scenarios
   - PCIDSS
+  - Handbook
+  - Testing
   - Online-kassa
+  - API Kassa
 
 
 search: true

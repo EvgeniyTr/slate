@@ -1,0 +1,213 @@
+	<style>
+	.sample {margin:15px;}
+	</style>
+	<head>
+	<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<title>widget</title>
+	<meta charset="utf-8">
+	
+	</head>
+	<body>
+        <div class="sample">
+            <form id="sample-form">
+                <table id="items">
+                    <thead>
+                        <tr>
+						</br>
+                            <th>Наименование</th>
+                            <th>Цена, &#8381;</th>
+                            <th>Количество</th>
+                            <th>НДС</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="text" required="" name="label" class="form-control" style="width: 270px" value="Пицца Барбекю" />
+                            </td>
+							
+                            <td>
+                                <input type="text" required="" name="price" class="form-control" style="width: 70px; text-align: right" value="450" />
+                            </td>
+                            <td>
+                                <input type="text" required="" name="quantity" class="form-control" style="width: 70px; text-align: right" value="2" />
+                                <input type="hidden" name="amount" value="900" />
+                            </td>
+                            <td>
+                                <select class="form-control" name="vat">
+                                    <option value="">Без НДС</option>
+                                    <option value="18">18%</option>
+                                    <option value="10">10%</option>
+                                    <option value="0">0%</option>
+                                    <option value="110">10/110</option>
+                                    <option value="118">18/118</option>
+                                </select>
+                            </td>
+                        </tr>
+						
+                        <tr>
+                            <td>
+                                <input type="text" required="" name="label" class="form-control" style="width: 270px" value="Крылышки Баффало" />
+                            </td>
+                            <td>
+                                <input type="text" required="" name="price" class="form-control" style="width: 70px; text-align: right" value="270" />
+                            </td>
+                            <td>
+                                <input type="text" required="" name="quantity" class="form-control" style="width: 70px; text-align: right" value="3" />
+                                <input type="hidden" name="amount" value="810" />
+                            </td>
+                            <td>
+                                <select class="form-control" name="vat">
+                                    <option value="">Без НДС</option>
+                                    <option value="18">18%</option>
+                                    <option value="10">10%</option>
+                                    <option value="0">0%</option>
+                                    <option value="110">10/110</option>
+                                    <option value="118">18/118</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" required="" name="label" class="form-control" style="width: 270px" value="Морс брусничный" />
+                            </td>
+                            <td>
+                                <input type="text" required="" name="price" class="form-control" style="width: 70px; text-align: right" value="80" />
+                            </td>
+                            <td>
+                                <input type="text" required="" name="quantity" class="form-control" style="width: 70px; text-align: right" value="1" />
+                                <input type="hidden" name="amount" value="80" />
+                            </td>
+                            <td>
+                                <select class="form-control" name="vat">
+                                    <option value="">Без НДС</option>
+                                    <option value="18">18%</option>
+                                    <option value="10">10%</option>
+                                    <option value="0">0%</option>
+                                    <option value="110">10/110</option>
+                                    <option value="118">18/118</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p></p>
+                Укажите <a href="#" id="send-to-email-link">e-mail</a> или <a href="#" id="send-to-phone-link">телефон</a> для кассового чека. В e-mail сообщении чек будет приложен отдельным документом, а в СМС &mdash; ссылкой.
+
+                <div class="form-group">
+                    <input type="email" id="customer-email" placeholder="e-mail адрес" class="form-control" style="width: 270px" />
+                    <input type="text" id="customer-phone" placeholder="номер телефона" class="form-control" style="width: 270px;" />
+                </div>
+				</br></br>
+                <div class="form-group" style="text-align: left">
+                    <input type="submit" id="pay-button" value="Оплатить 1790 руб." class="btn" />
+                </div>
+				</br>
+				</br>
+
+            </form>
+
+            <span id="checkout-result" class="brown"> Использовать можно как тестовые, так и реальные карточные данные.Деньги списываться не будут..</span>
+
+            <script type="text/javascript">
+                $(function () {
+                    $('#send-to-email-link').click(function (e) {
+                        e.preventDefault();
+                        $('#customer-email').show();
+                        $('#customer-email').attr("required", true);
+                        $('#customer-email').focus();
+                        $('#customer-phone').hide();
+                        $('#customer-phone').removeAttr('required');
+                        $('#customer-phone').val('');
+                    });
+                    $('#send-to-phone-link').click(function (e) {
+                        e.preventDefault();
+                        $('#customer-phone').show();
+                        $('#customer-phone').attr("required", true);
+                        $('#customer-phone').focus();
+                        $('#customer-email').hide();
+                        $('#customer-email').removeAttr('required');
+                        $('#customer-email').val('');
+                    });
+
+                    $('#items input:text').on('input', function (e) {
+                        var total = 0;
+                        $('#items tbody tr').each(function () {
+                            var price = $("input[name='price']", this).val();
+                            var qty = $("input[name='quantity']", this).val();
+                            var lineTotal = (parseFloat(price) * parseFloat(qty));
+
+                            var amount = Math.round(lineTotal * 100) / 100; //округление до двух знаков
+
+                            $("input[name='amount']", this).val(amount);
+                            total += amount;
+                        });
+
+                        if (isNaN(total)) {
+                            $('#pay-button').prop('disabled', true);
+
+                        } else {
+                            $('#pay-button').val('Оплатить ' + total + ' руб.');
+                            $('#pay-button').prop('disabled', false);
+                        }
+                    });
+
+                    $('#sample-form').submit(function (e) {
+                        e.preventDefault();
+
+                        var items = [];
+                        var total = 0;
+
+                        $('#items tbody tr').each(function () {
+                            var label = $("input[name='label']", this).val();
+                            var price = $("input[name='price']", this).val();
+                            var qty = $("input[name='quantity']", this).val();
+                            var amount = $("input[name='amount']", this).val();
+                            var vat = $("select[name='vat']", this).val();
+
+                            items.push({
+                                label: label,
+                                price: parseFloat(price),
+                                quantity: parseFloat(qty),
+                                amount: parseFloat(amount),
+                                vat: vat
+                            });
+
+                            total += parseFloat(amount);
+                        });
+
+                        var data = {
+                            cloudPayments: {
+                                customerReceipt: {
+                                    items: items,
+                                    email: $('#customer-email').val(),
+                                    phone: $('#customer-phone').val(),
+                                }
+                            }
+                        };
+
+                        var widget = new cp.CloudPayments();
+                        widget.charge({ // options
+                            publicId: 'pk_b430f8b23575e9942b71e7d2b3f49',  //id из личного кабинета
+                            description: 'Пример оплаты с чеком (деньги сниматься не будут)', //назначение
+                            amount: total, //сумма
+                            currency: 'RUB', //валюта
+                            invoiceId: '987654', //номер заказа
+                            data: data,
+                            email: data.cloudPayments.customerReceipt.email
+                        },
+                            function (options) { // success
+                                $('#checkout-result').text('Оплата завершена. Чек будет сформирован и отправлен в течение нескольких секунд');
+                            },
+                            function (reason, options) { // fail
+                                $('#checkout-result').text('Оплата не завершена');
+                            });
+                    })
+                });
+
+            </script>
+
+        </div>
+			</body>

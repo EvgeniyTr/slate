@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-	<style>
-	.sample {margin:15px;}
-	</style>
 	<head>
 	<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -17,14 +14,14 @@
                 <input id="account-sample-3" required="" placeholder="" class="form-control" type="text">
             </div>
         </div>
-		<br>
+
         <div class="form-group">
             <label for="amount-sample-3">Сумма:</label>
             <div>
                 <input id="amount-sample-3" required="" placeholder="" class="form-control" type="text">
             </div>
         </div>
-		<br>
+
         <div class="form-group">
             <label for="recurrent-sample-3">
                 <input id="recurrent-sample-3" type="checkbox">
@@ -32,7 +29,7 @@
             </label>
             <p class="help-block">При включении ваш счет будет пополняться с карты автоматически раз в месяц.</p>
         </div>
-		<br>
+
         <input id="checkout-sample-3" value="Перейти к оплате" class="btn" type="button">
 
         <br>
@@ -80,6 +77,19 @@ this.paySample3 = function () {
 };
 
 $('#checkout-sample-3').click(paySample3)
+$(document).ready(function() {
+	$(".iframe").fancybox({
+		maxWidth	: 800,
+		maxHeight	: 600,
+		fitToView	: false,
+		width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+		closeClick	: false,
+		openEffect	: 'none',
+		closeEffect	: 'none'
+	});
+});
 </script>
-</body>
+	</body>
 </html>

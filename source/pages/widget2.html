@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
+	<style>
+	.sample {margin:15px;}
+	</style>
 	<head>
-	<title>!widget</title>
+	<title>widget</title>
 	<meta charset="utf-8">
+		<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="sample">
@@ -55,36 +60,48 @@
         <div class="form-group">
             Вы можете остановить регулярные платежи в любой момент на <a href="https://my.cloudpayments.ru/unsubscribe">сайте системы CloudPayments</a>.
         </div>
-    </div>
-        <div class="form-group">
-            <label for="account-sample-3">Номер абонента:</label>
-            <div>
-                <input id="account-sample-3" required="" placeholder="" class="form-control" type="text">
-            </div>
-        </div>
 
-        <div class="form-group">
-            <label for="amount-sample-3">Сумма:</label>
-            <div>
-                <input id="amount-sample-3" required="" placeholder="" class="form-control" type="text">
-            </div>
-        </div>
+	<script>
+	//note: в примере используется библиотека jquery
 
-        <div class="form-group">
-            <label for="recurrent-sample-3">
-                <input id="recurrent-sample-3" type="checkbox">
-                Включить ежемесячные платежи
-            </label>
-            <p class="help-block">При включении ваш счет будет пополняться с карты автоматически раз в месяц.</p>
-        </div>
+this.paySample4 = function () {
+    var widget = new cp.CloudPayments();
 
-        <input id="checkout-sample-3" value="Перейти к оплате" class="btn" type="button">
+    var data = { //данные дарителя
+        name: $('#name-sample-4').val(),
+        lastName: $('#lastName-sample-4').val(),
+        phone: $('#phone-sample-4').val()
+    };
 
-        <br>
-        <br>
-        <div class="form-group">
-            Вы можете остановить регулярные платежи в любой момент на <a href="https://my.cloudpayments.ru/unsubscribe">сайте системы CloudPayments</a>.
-        </div>
-    </div>
+    var auto = $('#recurrent-sample-4').is(':checked'); //проверка
+
+    if (auto) { //включаем подписку
+        data.cloudPayments = {
+            recurrent: { interval: 'Month', period: 1 } //один раз в месяц начиная со следующего месяца
+        }
+    }
+
+    var amount = parseFloat($('#amount-sample-4').val());
+    var accountId = $('#email-sample-4').val();
+
+    widget.charge({ // options
+        publicId: 'pk_b430f8b23575e9942b71e7d2b3f49', //id из личного кабинета
+        description: 'Пожертвование в фонд ...', //назначение
+        amount: amount, //сумма
+        currency: 'RUB', //валюта
+        accountId: accountId, //идентификатор плательщика (обязательно для создания подписки)
+        email: accountId,
+        data: data
+    },
+    function (options) { // success
+        //действие при успешной оплате
+    },
+    function (reason, options) { // fail
+        //действие при неуспешной оплате
+    });
+};
+
+$('#checkout-sample-4').click(paySample4);
+</script>
 	</body>
 </html>

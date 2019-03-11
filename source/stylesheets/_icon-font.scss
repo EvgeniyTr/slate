@@ -1,19 +1,30 @@
 @font-face {
-  font-family: 'slate';
-  src:font-url('slate.eot?-syv14m');
-  src:font-url('slate.eot?#iefix-syv14m') format('embedded-opentype'),
-    font-url('slate.woff2?-syv14m') format('woff2'),
-    font-url('slate.woff?-syv14m') format('woff'),
-    font-url('slate.ttf?-syv14m') format('truetype'),
-    font-url('slate.svg?-syv14m#slate') format('svg');
-  font-weight: normal;
+  font-family: 'Stolzl';
+  src: url('../fonts/Stolzl-Light.eot');
+  src: url('../fonts/Stolzl-Light.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/Stolzl-Light.woff2') format('woff2'),
+  url('../fonts/Stolzl-Light.woff') format('woff'),
+  url('../fonts/Stolzl-Light.ttf') format('truetype'),
+  url('../fonts/Stolzl-Light.svg#Stolzl-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Slate';
+  src: url('../fonts/slate.eot');
+  src: url('../fonts/slate.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/slate.woff2') format('woff2'),
+  url('../fonts/slate.woff') format('woff'),
+  url('../fonts/slate.ttf') format('truetype'),
+  url('../fonts/slate.svg#Stolzl-Light') format('svg');
+  font-weight: 300;
   font-style: normal;
 }
 
 %icon {
-  font-family: 'slate';
+  font-family: Slate;
   speak: none;
-  font-style: normal;
   font-weight: normal;
   font-variant: normal;
   text-transform: none;
@@ -34,5 +45,6 @@
 }
 %icon-search {
   @extend %icon;
+  color: blue;
   content: "\e607";
 }

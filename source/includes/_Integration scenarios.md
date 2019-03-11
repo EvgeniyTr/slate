@@ -48,7 +48,7 @@
 Платежное решение подходит для интернет-провайдеров, операторов связи и телекомов. Уведомления на проверку и регистрацию платежей могут быть настроены как в формате CloudPayments, так и в формате QIWI (ОСМП).
 
 
-<iframe src="pages/widget.html" width=89.80%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
+<iframe src="pages/widget.html" width=100%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
 
 
 **Код формы:**
@@ -103,7 +103,7 @@ $('#checkout-sample-3').click(paySample3);
 
 Платежное решение подходит для благотворительных фондов. Имя, фамилия, телефон, e-mail и любые другие данные с формы будут сохранены в виджете и переданы на ваш сервер через [Pay уведомление](#pay).
 
-<iframe src="pages/widget2.html" width=89.80%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
+<iframe src="pages/widget2.html" width=100%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
 
 **Код формы:**
 
@@ -158,7 +158,7 @@ $('#checkout-sample-4').click(paySample4);
 
 
 
-<iframe src="pages/widget3.html" width=89.80%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
+<iframe src="pages/widget3.html" width=100%" height="600px" align="baseline"  hspace="2px" vspace="2px" frameborder="1" style="border: 2px" seamless></iframe>
 
 
 **Код формы:**
@@ -208,11 +208,11 @@ $('#checkout-sample-5').click(paySample5);
 - На вашем сайте необходима авторизация пользователей с доступом в личный кабинет; 
 - Перед созданием плана подписки, проинформируйте пользователя о тарифном плане, периодичности платежей и предложите указать карточные данные:  
 ![recurring1](images/recurring1.png)  
-Если пользователь согласится, сохраните после оплаты в его профиле маску карты (тип и последние 4 цифры), а также токен. Параметры карты и токен система возвращает в [Pay](#pay) уведомлении и через API. Обязательным условием получения токена является передача идентификатора пользователя в параметре `AccountId`.  
+Если пользователь согласится, сохраните после оплаты в его профиле маску карты (тип и последние 4 цифры), а также токен. Параметры карты и токен система возвращает в [[Pay]]() уведомлении и через API. Обязательным условием получения токена является передача идентификатора пользователя в параметре `AccountId`.  
 
 - При последующих оплатах, предлагайте пользователю оплатить с ранее привязанной карты:  
 ![recurring2](images/recurring2.png)  
-Если пользователь выбирает ранее использованную карту — вызывайте метод [оплаты по токену](#oplata-po-tokenu-rekarring) через API;
+Если пользователь выбирает ранее использованную карту — вызывайте метод [[оплаты по токену]]() через API;
 - Предоставьте пользователю возможность управлять своими картами:  
 ![recurring3](images/recurring3.png)  
 Если пользователь не желает более платить с привязанной карты, удалите маску и токен из его профиля; 

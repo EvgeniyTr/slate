@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+	<style>
+	.sample {margin:15px;}
+	</style>
+	<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<head>
 	<title>!widget</title>
 	<meta charset="utf-8">
@@ -7,22 +12,61 @@
 	<body>
      <div class="sample">
         <div class="form-group">
+		</br>
             <p>Стоимость: 12 000 рублей. Пожалуйста, выберите вариант оплаты:</p>
+			</br>
+			</br>
             <div>
                 <label for="select-sample-5-now">
+				</br>
                     <input name="select-sample-5" id="select-sample-5-now" checked="checked" type="radio">
                     оплатить 12 000 рублей сейчас
                 </label>
             </div>
             <div>
                 <label for="select-sample-5-later">
+				</br>
                     <input name="select-sample-5" id="select-sample-5-later" type="radio">
                     оплатить 6 000 рублей сейчас, остальное в рассрочку на 6 месяцев
                 </label>
             </div>
         </div>
-
+</br>
         <input id="checkout-sample-5" value="Оплатить" class="btn" type="button">
     </div>
+	<script>
+	this.paySample5 = function () {
+    var widget = new cp.CloudPayments();
+
+    var amount = 12000; //по умолчанию 12000 рублей разом
+    var data = {};
+
+    var payLater = $('#select-sample-5-later').is(':checked'); //проверка
+
+    if (payLater) { //включаем подписку
+        data.cloudPayments = {
+            recurrent: { interval: 'Month', period: 1, amount: 1000, maxPeriods: 6 } //6 месяцев по 1000 рублей начиная со следующего месяца
+        };
+        amount = 6000; //сумма первого платежа - 6000 рублей.
+    }
+
+    widget.charge({ // options
+        publicId: 'pk_b430f8b23575e9942b71e7d2b3f49', //id из личного кабинета
+        description: 'Оплата ...', //назначение
+        amount: amount, //сумма
+        currency: 'RUB', //валюта
+        accountId: 'user@example.com', //идентификатор плательщика (обязательно для создания подписки)
+        data: data
+    },
+    function (options) { // success
+        //действие при успешной оплате
+    },
+    function (reason, options) { // fail
+        //действие при неуспешной оплате
+    });
+};
+
+$('#checkout-sample-5').click(paySample5);
+</script>
 	</body>
 </html>
