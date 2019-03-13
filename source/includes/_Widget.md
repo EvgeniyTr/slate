@@ -106,7 +106,7 @@ Period |	Int |	Обязательный |	Период. В комбинации 
 MaxPeriods |	Int |	Необязательный |	Максимальное количество платежей в подписке. По умолчанию без ограничений.
 Amount |	Numeric |	Необязательный |	Сумма регулярного платежа. По умолчанию совпадает с суммой первого (установочного) платежа.
 StartDate |	DateTime |	Необязательный |	Дата и время первого регулярного платежа. По умолчанию запуск произойдет через указанный интервал и период, например через месяц.
-СustomerReceipt |	String |	Необязательный |	Данные для формирования онлайн-чека. 
+CustomerReceipt |	String |	Необязательный |	Данные для формирования онлайн-чека. 
 
 Параметры для запуска регулярных платежей необходимо добавить в объект `data.cloudPayments.recurrent` по примеру ниже:
 
@@ -139,7 +139,7 @@ this.pay = function () {
 		};
 
     var data = {};
-    data.cloudPayments = {recurrent: { interval: 'Month', period: 1, сustomerReceipt: receipt}}; //создание ежемесячной подписки
+    data.cloudPayments = {recurrent: { interval: 'Month', period: 1, customerReceipt: receipt}}; //создание ежемесячной подписки
 
     widget.charge({ // options
         publicId: 'test_api_00000000000000000000001', //id из личного кабинета
